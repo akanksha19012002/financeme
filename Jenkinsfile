@@ -6,7 +6,6 @@ pipeline {
                 git url:'https://github.com/prad-uction/FinanceMeProject.git'
             }
         }
-
         stage('Packaging the code'){
             steps{
                 sh 'mvn clean package'
@@ -29,7 +28,7 @@ pipeline {
                         sh 'docker tag financebanking akankshapande19/bankingimage:v1'
                         sh 'sudo docker push akankshapande19/bankingimage:v1'
                 }
-
+                }
             }
         }
 
