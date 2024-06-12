@@ -18,10 +18,7 @@
         state: started
         enabled: yes
 
-    - name: Deploy Docker Container
-      command: docker run -itd --name CBScontainer -p 8082:8081 financebanking:1.0
-      args:
-        chdir: /home/ubuntu  # Optional, if you need to run the command from a specific directory
+
 
 
 
