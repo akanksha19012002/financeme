@@ -16,4 +16,7 @@
     become : yes
     become_user : root
 
+  - name: Deploy Docker Container
+    command: docker run -itd --name CBScontainer -p 8082:8081 financebanking:1.0
+
 
