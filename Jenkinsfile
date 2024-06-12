@@ -36,7 +36,7 @@ pipeline {
 
      stage('Deploy on Ansible') {
             steps {
-               ansiblePlaybook become: true, credentialsId: 'Ansible', disableHostKeyChecking: true, installation: 'Ansible', inventory: '/etc/ansible/hosts', playbook: 'ansible-playbook.yml', vaultTmpPath: ''
+              ansiblePlaybook become: true, credentialsId: 'dockerhub-pwd', disableHostKeyChecking: true, installation: 'Ansible', inventory: '/etc/ansible/hosts', playbook: 'ansible-playbook.yml', vaultTmpPath: ''
             }
         }
     }
