@@ -20,6 +20,13 @@ pipeline {
                 }
             }
         }
+         stage('Docker login') {
+            steps {
+                  withCredentials([usernamePassword(credentialsId: 'dockerhub-pwd', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                     sh "echo $PASS | docker login -u $USER --password-stdin"
+                     sh 'sudo docker push akankshapande19/bankingimage:v1'
+                }
+            }
 
         stage('Containerization and Deployment'){
             steps{
@@ -27,16 +34,11 @@ pipeline {
             }
         }
 
-        stage('Image tag and push to DockerHub'){
-            steps{
-                script{
-                        sh 'docker tag financebanking akankshapande19/bankingimage:v1'
-                        sh 'sudo docker push akankshapande19/bankingimage:v1'
-                }
-
+     stage('Deploy on Ansible') {
+            steps {
+               ansiblePlaybook become: true, credentialsId: 'Ansible', disableHostKeyChecking: true, installation: 'Ansible', inventory: '/etc/ansible/hosts', playbook: 'ansible-playbook.yml', vaultTmpPath: ''
             }
         }
-
-
+    }
    }
 }
