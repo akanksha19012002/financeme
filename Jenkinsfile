@@ -14,7 +14,7 @@ pipeline {
         stage('Building Docker image'){
             steps{
                 script{
-                    sh 'docker build -t financebanking .'
+                    sh 'sudo docker build -t financebanking .'
                     sh 'docker images'
                 }
             }
