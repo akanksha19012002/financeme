@@ -14,7 +14,7 @@ pipeline {
         stage('Building Docker image'){
             steps{
                 script{
-                    sh 'echo "Akanksha@2002" | sudo -S docker build -t financebanking .'
+                    sh 'docker build -t financebanking .'
                     sh 'docker images'
                 }
             }
