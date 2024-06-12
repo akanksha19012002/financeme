@@ -3,7 +3,7 @@ pipeline {
     stages{
         stage('Clone FinanceMeProject'){
             steps{
-                git url:'https://github.com/akanksha19012002/financeme.git'
+                git url:'https://github.com/akanksha19012002/financeme.git', branch: "master"
             }
         }
         stage('Packaging the code'){
