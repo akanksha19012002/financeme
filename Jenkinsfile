@@ -3,7 +3,7 @@ pipeline {
     stages{
         stage('Clone FinanceMeProject'){
             steps{
-                git url:'https://github.com/akanksha19012002/financeme.git'
+                git url:'https://github.com/prad-uction/FinanceMeProject.git'
             }
         }
 
@@ -20,17 +20,20 @@ pipeline {
                 }
             }
         }
-         stage('Docker login') {
-            steps {
-                  withCredentials([usernamePassword(credentialsId: 'dockerhub-pwd', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-                     sh "echo $PASS | docker login -u $USER --password-stdin"
-                     sh 'sudo docker push akankshapande19/bankingimage:v1'
-                }
-            }
 
         stage('Containerization and Deployment'){
             steps{
-                sh 'docker run -itd --name CBScontainer -p 8082:8081 financebanking'
+                sh 'docker run -itd --name CBS -p 8082:8081 financebanking'
+            }
+        }
+
+        stage('Image tag and push to DockerHub'){
+            steps{
+                script{
+                        sh 'docker tag financebanking pradocks/bankingimage:v1'
+                        sh 'sudo docker push pradocks/bankingimage:v1'
+                }
+
             }
         }
 
